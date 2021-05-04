@@ -4,11 +4,11 @@ const sql = require("./db.js");
 
 // Constructor
 const User = function(user) {
-    this.user = user.name;
-    this.user = user.lastName;
-    this.user = user.company;
-    this.user = user.phoneNumber;
-    this.user = user.email;
+    this.name = user.name;
+    this.lastName = user.lastName;
+    this.company = user.company;
+    this.phoneNumber = user.phoneNumber;
+    this.email = user.email;
 };
 
 User.create = (newUser, result) => {
@@ -19,7 +19,7 @@ User.create = (newUser, result) => {
             return;
         }
   
-        console.log("created customer: ", { id: res.insertId, ...newUser });
+        console.log("created user: ", { id: res.insertId, ...newUser });
         result(null, { id: res.insertId, ...newUser });
     });
 };
