@@ -4,9 +4,10 @@ const express = require('express');
 
 const app = express();
 
-// load routes files
+// Load routes files
+var userRoutes = require('./routes/user.routes');
 
-// middlewares
+// Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -19,8 +20,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// routes
-app.get('/')
+// Routes
+app.use('/', userRoutes);
 
 // Export
 module.exports = app;

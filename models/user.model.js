@@ -2,14 +2,16 @@
 
 const sql = require("./db.js");
 
-// constructor
+// Constructor
 const User = function(user) {
-    this.user = user.email;
     this.user = user.name;
-    this.user = user.active;
+    this.user = user.lastName;
+    this.user = user.company;
+    this.user = user.phoneNumber;
+    this.user = user.email;
 };
 
-Customer.create = (newUser, result) => {
+User.create = (newUser, result) => {
     sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
         if (err) {
             console.log("error: ", err);
