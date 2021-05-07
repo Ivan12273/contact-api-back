@@ -7,11 +7,64 @@ var controller = {
     create: function(req, res) {
         // Validate request
         if (!req.body) {
-            res.status(400).send({
+            return res.status(400).send({
                 message: "Error, empty request"
             });
         }
 
+        // Validate name
+        var name = req.body.name;
+        var matches = name.match(/\d+/g);
+        if(matches != null) {
+            return res.status(400).send({
+                message: "The name must not contain numbers"
+            });
+        } else if (name.replace(/ /g, "") == "" || name == null) {
+            return res.status(400).send({
+                message: "The name field must not be empty"
+            });
+        }
+
+        // Validate lastname
+        var lastName = req.body.lastName;
+        var matches = lastName.match(/\d+/g);
+        if(matches != null) {
+            return res.status(400).send({
+                message: "The last name must not contain numbers"
+            });
+        } else if (lastName.replace(/ /g, "") == "" || lastName == null) {
+            return res.status(400).send({
+                message: "The last name field must not be empty"
+            });
+        }
+
+        // Validate company
+        var company = req.body.company;
+        var matches = company.replace(/ /g, "").match(/^[0-9a-zA-Z]+$/);
+        if(!matches) {
+            return res.status(400).send({
+                message: "Company field must only have alphanumeric characters"
+            });
+        } 
+
+        // Validate phone number
+        var phoneNumber = req.body.phoneNumber;
+        var matches = phoneNumber.match(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/);
+        if(!matches && phoneNumber != "" && phoneNumber != null) {
+            return res.status(400).send({
+                message: "Write a valid number"
+            });
+        } 
+
+        // Validate email
+        var email = req.body.email;
+        var matches = email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/);
+        if(!matches) {
+            return res.status(400).send({
+                message: "Write a valid email"
+            });
+        } 
+   
         // Create a User
         const user = new User({
             name: req.body.name,
@@ -24,12 +77,12 @@ var controller = {
         // Save user in the database
         User.create(user, (err, data) => {
             if (err) {
-                res.status(500).send({
+                return res.status(500).send({
                     message:
                     err.message || "Some error occurred while creating the user."
                 });
             } else {
-                res.send(data);
+                return res.send(data); //201
             }
         });
     },
@@ -38,16 +91,16 @@ var controller = {
         User.findById(req.params.userId, (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
-                    res.status(404).send({
+                    return res.status(404).send({
                         message: `Not found user with id ${req.params.userId}.`
                     });
                 } else {
-                    res.status(500).send({
+                    return res.status(500).send({
                         message: "Error retrieving user with id " + req.params.userId
                     });
                 }
             } else {
-                res.send(data);
+                return res.send(data);
             }
         });
     },
@@ -55,22 +108,75 @@ var controller = {
     getAll: function(req, res) {
         User.getAll((err, data) => {
             if (err) {
-                res.status(500).send({
+                return res.status(500).send({
                     message:
                     err.message || "Some error occurred while retrieving users."
                 });
             } else {
-                res.send(data);
+                return res.send(data);
             }
         });
     },
 
     update: function(req, res) {
         if (!req.body) {
-            res.status(400).send({
+            return res.status(400).send({
                 message: "Content can not be empty!"
             });
         }
+
+        // Validate name
+        var name = req.body.name;
+        var matches = name.match(/\d+/g);
+        if(matches != null) {
+            return res.status(400).send({
+                message: "The name must not contain numbers"
+            });
+        } else if (name.trim() == "") {
+            return res.status(400).send({
+                message: "The name field must not be empty"
+            });
+        }
+
+        // Validate lastname
+        var lastName = req.body.lastName;
+        var matches = lastName.match(/\d+/g);
+        if(matches != null) {
+            return res.status(400).send({
+                message: "The last name must not contain numbers"
+            });
+        } else if (lastName.trim() == "") {
+            return res.status(400).send({
+                message: "The last name field must not be empty"
+            });
+        }
+
+        // Validate company
+        var company = req.body.company;
+        var matches = company.replace(/ /g, "").match(/^[0-9a-zA-Z]+$/);
+        if(!matches) {
+            return res.status(400).send({
+                message: "Company field must only have alphanumeric characters"
+            });
+        } 
+
+        // Validate phone number
+        var phoneNumber = req.body.phoneNumber;
+        var matches = phoneNumber.match(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/);
+        if(!matches && phoneNumber != "" && phoneNumber != null) {
+            return res.status(400).send({
+                message: "Write a valid number"
+            });
+        } 
+
+        // Validate email
+        var email = req.body.email;
+        var matches = email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/);
+        if(!matches) {
+            return res.status(400).send({
+                message: "Write a valid email"
+            });
+        } 
         
         User.update(
             req.params.userId,
@@ -78,16 +184,16 @@ var controller = {
             (err, data) => {
                 if (err) {
                 if (err.kind === "not_found") {
-                    res.status(404).send({
+                    return res.status(404).send({
                         message: `Not found user with id ${req.params.userId}.`
                     });
                 } else {
-                    res.status(500).send({
+                    return res.status(500).send({
                         message: "Error updating user with id " + req.params.userId
                     });
                 }
                 } else {
-                    res.send(data);
+                    return res.send(data);
                 } 
             }
         );
@@ -97,16 +203,16 @@ var controller = {
         User.delete(req.params.userId, (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
-                    res.status(404).send({
+                    return res.status(404).send({
                         message: `Not found user with id ${req.params.userId}.`
                     });
                 } else {
-                    res.status(500).send({
+                    return res.status(500).send({
                         message: "Could not delete user with id " + req.params.userId
                     });
                 }
             } else {
-                res.send({ message: `User with id ` + req.params.userId + ` was deleted successfully` });
+                return res.send({ message: `User with id ` + req.params.userId + ` was deleted successfully` });
             }
         });
     }
