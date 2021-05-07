@@ -10,10 +10,27 @@ API for manage users contact information.
 - [Future updates](#future-updates)
 
 ## Project description
+The purpose of this API is to store, consult, update and delete the user's contact information.
+The information that this API stores is:
+- User first name
+- User last name
+- User's company
+- User's phone number
+- User email
 
 ## Instructions
+Download the project and run the command "npm install" to install all the dependencies used in this project, to run the api use the command "npm start".
+The api is configured to run on port 3700.
+This project requires you to connect to a SQL database, you can find it in the root of this repository as "contact.sql" and inside the configuration folder, there is a file to enter the data for the database.
 
 ## Project structure
+The structure of this project consist in four folders:
+- Config: Here is the database configuration data.
+- Models: This folder has two files, the first one is db.js where the API makes the connection to the database. The second is user.mode.js, this file is responsible for making the queries to the database and returning the result.
+- Controllers: In this folder is the controller, this file is in charge of returning the json responses and the status, it gets the parameters and/or request body and performs the queries. Also, here are the validations and error handling.
+- Routes: In this file are the POST, GET, PUT and DELETE paths of the project.
+
+Additionally, there is a server.js file in the root of the project, this file loads all the routes of the project, implements the middleware so that the API can receive json files, has the CORS settings and it sets the project port.
 
 ## API routes
 
@@ -187,3 +204,9 @@ Nothing.
     }
 
 ## Future updates
+I considered some future implementations in case to continue with this project. The idea was to implement them this week, but due to lack of time that could not be possible:
+- Create a DAO, the current code has the queries to the database in the model and it would be better to separate it.
+- Implement singleton pattern in the DAO.
+- Configuration file to run the project in local and for the deployment, the configuration file in this repository is local only.
+- Make the API documentation with swagger.
+- More validations.
