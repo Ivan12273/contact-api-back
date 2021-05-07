@@ -149,7 +149,7 @@ var controller = {
             return res.status(400).send({
                 message: "The name must not contain numbers"
             });
-        } else if (name.trim() == "") {
+        } else if (name.replace(/ /g, "") == "" || name == null) {
             return res.status(400).send({
                 message: "The name field must not be empty"
             });
@@ -162,7 +162,7 @@ var controller = {
             return res.status(400).send({
                 message: "The last name must not contain numbers"
             });
-        } else if (lastName.trim() == "") {
+        } else if (lastName.replace(/ /g, "") == "" || lastName == null) {
             return res.status(400).send({
                 message: "The last name field must not be empty"
             });
@@ -171,7 +171,7 @@ var controller = {
         // Validate company
         var company = req.body.company;
         var matches = company.replace(/ /g, "").match(/^[0-9a-zA-Z]+$/);
-        if(!matches) {
+        if(!matches && company != "" && company != null) {
             return res.status(400).send({
                 message: "Company field must only have alphanumeric characters"
             });
@@ -185,6 +185,10 @@ var controller = {
                 message: "Write a valid number"
             });
         } 
+
+        if(phoneNumber == "") {
+            req.body.phoneNumber = null;
+        }
 
         // Validate email
         var email = req.body.email;
