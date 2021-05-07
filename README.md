@@ -210,3 +210,4 @@ I considered some future implementations in case to continue with this project. 
 - Configuration file to run the project in local and for the deployment, the configuration file in this repository is local only.
 - Make the API documentation with swagger.
 - More validations.
+- Filer by name and last name.
