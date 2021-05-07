@@ -34,7 +34,7 @@ CREATE TABLE `user` (
   `lastName` varchar(50) NOT NULL,
   `company` varchar(50) DEFAULT NULL,
   `phoneNumber` varchar(20) DEFAULT NULL,
-  `email` varchar(70) DEFAULT NULL
+  `email` varchar(70) DEFAULT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
