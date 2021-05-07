@@ -20,7 +20,6 @@ class User {
                 return;
             }
 
-            console.log("created user: ", { id: res.insertId, ...newUser });
             result(null, { id: res.insertId, ...newUser });
         });
     }
@@ -34,7 +33,6 @@ class User {
             }
 
             if (res.length) {
-                console.log("found user: ", res[0]);
                 result(null, res[0]);
                 return;
             }
@@ -51,7 +49,6 @@ class User {
                 return;
             }
 
-            console.log("users: ", res);
             result(null, res);
         });
     }
@@ -74,7 +71,7 @@ class User {
                 'page_number':page,
                 'users':res
             }
-            console.log("result: ", jsonResult);
+     
             result(null, jsonResult);
         });
     }
@@ -96,7 +93,6 @@ class User {
                     return;
                 }
 
-                console.log("updated user: ", { id: id, ...user });
                 result(null, { id: id, ...user });
             }
         );
@@ -116,7 +112,6 @@ class User {
                 return;
             }
 
-            console.log("deleted user with id: ", id);
             result(null, res);
         });
     }
