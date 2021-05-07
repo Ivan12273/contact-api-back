@@ -41,7 +41,7 @@ var controller = {
         // Validate company
         var company = req.body.company;
         var matches = company.replace(/ /g, "").match(/^[0-9a-zA-Z]+$/);
-        if(!matches) {
+        if(!matches && company != "" && company != null) {
             return res.status(400).send({
                 message: "Company field must only have alphanumeric characters"
             });
@@ -55,6 +55,10 @@ var controller = {
                 message: "Write a valid number"
             });
         } 
+
+        if(phoneNumber == "") {
+            req.body.phoneNumber = null;
+        }
 
         // Validate email
         var email = req.body.email;
