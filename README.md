@@ -211,3 +211,4 @@ I considered some future implementations in case to continue with this project. 
 - Make the API documentation with swagger.
 - More validations.
 - Filer by name and last name.
+- Protection to SQL injection.
