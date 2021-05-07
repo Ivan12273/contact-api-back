@@ -118,6 +118,19 @@ var controller = {
         });
     },
 
+    getAllWithPagination: function(req, res) {
+        User.getAllWithPagination(req.params.page, (err, data) => {
+            if (err) {
+                return res.status(500).send({
+                    message:
+                    err.message || "Some error occurred while retrieving users."
+                });
+            } else {
+                return res.send(data);
+            }
+        });
+    },
+
     update: function(req, res) {
         if (!req.body) {
             return res.status(400).send({

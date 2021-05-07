@@ -55,6 +55,29 @@ class User {
             result(null, res);
         });
     }
+    // Get all user with pagination
+    static getAllWithPagination (pageParam, result) {
+        // limit as 20
+        const limit = 10;
+        // page number
+        const page = pageParam;
+        // calculate offset
+        const offset = (page - 1) * limit;
+        sql.query("SELECT * FROM user limit " + limit + " OFFSET " + offset, (err,res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+            var jsonResult = {
+                'products_page_count':res.length,
+                'page_number':page,
+                'users':res
+            }
+            console.log("result: ", jsonResult);
+            result(null, jsonResult);
+        });
+    }
     // Update an user
     static update(id, user, result) {
         sql.query(

@@ -8,6 +8,7 @@ const user = require("../controllers/user.controller.js");
 router.post("/user", user.create);
 router.get("/user/:userId", user.findById);
 router.get("/user", user.getAll);
+router.get("/user/pagination/:page", user.getAllWithPagination);
 router.put("/user/:userId", user.update);
 router.delete("/user/:userId", user.delete);
 
