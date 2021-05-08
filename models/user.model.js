@@ -12,15 +12,17 @@ class User {
         this.email = user.email;
     }
     // Create user
-    static create(newUser, result) {
-        sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
+    static create(user, result) {
+        sql.query("INSERT INTO user SET name = ?, lastName = ?, company = ?, phoneNumber = ?, email = ?", 
+            [user.name, user.lastName, user.company, user.phoneNumber, user.email], 
+            (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
                 return;
             }
 
-            result(null, { id: res.insertId, ...newUser });
+            result(null, { id: res.insertId, ...user });
         });
     }
     // Get one user
