@@ -14,10 +14,10 @@ var controller = {
 
         // Validate name
         var name = req.body.name;
-        var matches = name.match(/\d+/g);
-        if(matches != null) {
+        var matches = name.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g);
+        if(!matches) {
             return res.status(400).send({
-                message: "The name must not contain numbers"
+                message: "The name is not valid"
             });
         } else if (name.replace(/ /g, "") == "" || name == null) {
             return res.status(400).send({
@@ -27,10 +27,10 @@ var controller = {
 
         // Validate lastname
         var lastName = req.body.lastName;
-        var matches = lastName.match(/\d+/g);
-        if(matches != null) {
+        var matches = lastName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g);
+        if(!matches) {
             return res.status(400).send({
-                message: "The last name must not contain numbers"
+                message: "The last name is not valid"
             });
         } else if (lastName.replace(/ /g, "") == "" || lastName == null) {
             return res.status(400).send({
@@ -40,10 +40,10 @@ var controller = {
 
         // Validate company
         var company = req.body.company;
-        var matches = company.replace(/ /g, "").match(/^[0-9a-zA-Z]+$/);
+        var matches = company.replace(/ /g, "").match(/^((?![\^!@#$*~ <>?]).)((?![\^!@#$*~<>?]).){0,73}((?![\^!@#$*~ <>?]).)$/g);
         if(!matches && company != "" && company != null) {
             return res.status(400).send({
-                message: "Company field must only have alphanumeric characters"
+                message: "The company name is not valid"
             });
         } 
 
@@ -144,10 +144,10 @@ var controller = {
 
         // Validate name
         var name = req.body.name;
-        var matches = name.match(/\d+/g);
-        if(matches != null) {
+        var matches = name.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g);
+        if(!matches) {
             return res.status(400).send({
-                message: "The name must not contain numbers"
+                message: "The name is not valid"
             });
         } else if (name.replace(/ /g, "") == "" || name == null) {
             return res.status(400).send({
@@ -157,10 +157,10 @@ var controller = {
 
         // Validate lastname
         var lastName = req.body.lastName;
-        var matches = lastName.match(/\d+/g);
-        if(matches != null) {
+        var matches = lastName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g);
+        if(!matches) {
             return res.status(400).send({
-                message: "The last name must not contain numbers"
+                message: "The last name is not valid"
             });
         } else if (lastName.replace(/ /g, "") == "" || lastName == null) {
             return res.status(400).send({
@@ -170,10 +170,10 @@ var controller = {
 
         // Validate company
         var company = req.body.company;
-        var matches = company.replace(/ /g, "").match(/^[0-9a-zA-Z]+$/);
+        var matches = company.replace(/ /g, "").match(/^((?![\^!@#$*~ <>?]).)((?![\^!@#$*~<>?]).){0,73}((?![\^!@#$*~ <>?]).)$/g);
         if(!matches && company != "" && company != null) {
             return res.status(400).send({
-                message: "Company field must only have alphanumeric characters"
+                message: "The company name is not valid"
             });
         } 
 
