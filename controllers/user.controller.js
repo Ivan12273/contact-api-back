@@ -135,6 +135,19 @@ var controller = {
         });
     },
 
+    getByNameOrLastname: function(req, res) {
+        User.getByNameOrLastname(req.params.nameOrLastname, (err, data) => {
+            if (err) {
+                return res.status(500).send({
+                    message:
+                    err.message || "Some error occurred while retrieving users."
+                });
+            } else {
+                return res.send(data);
+            }
+        });
+    },
+
     update: function(req, res) {
         if (!req.body) {
             return res.status(400).send({

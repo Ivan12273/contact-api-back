@@ -75,6 +75,18 @@ class User {
             result(null, jsonResult);
         });
     }
+    // Get user by name or lastname
+    static getByNameOrLastname(nameLastName, result) {
+        sql.query(`SELECT * FROM user WHERE name LIKE '%${nameLastName}%' || lastName LIKE '%${nameLastName}%'`, (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+
+            result(null, res);
+        });
+    }
     // Update an user
     static update(id, user, result) {
         sql.query(
